@@ -5,6 +5,6 @@ variable "project_name" {
 
 variable "workspace_admins" {
   type    = list
-  default = ["phani.kg@gmail.com", "doremansunio@gmail.com"]
+  default = ["phani.kg@gmail.com"]
 }
 
