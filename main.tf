@@ -57,12 +57,12 @@ resource "rafay_project" "rafay_proj" {
 }
 
 resource "rafay_group" "group-Workspace" {
-  name        = "grp_${var.project_name}"
+  name        = "WrkspAdmin-grp-${var.project_name}"
   description = "Workspace Admin Group for ${var.project_name}"
 }
 
 resource "rafay_groupassociation" "groupassociation" {
-  group      = "grp_${var.project_name}"
+  group      = "WrkspAdmin-grp-${var.project_name}"
   project    = var.project_name
   roles = ["WORKSPACE_ADMIN"]
   add_users = var.workspace_admins
