@@ -8,7 +8,7 @@ terraform {
 }
 
 provider "rafay" {
-  provider_config_file = "rafay_config.json"
+  provider_config_file = "./rafay_config.json"
 }
 
 resource "null_resource" "tfc_test" {
