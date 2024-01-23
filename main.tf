@@ -18,7 +18,7 @@ provider "rafay" {
 #   }
 # }
    
-resource "rafay_project" "tfdemoproject1" {
+resource "rafay_project" "rafay_proj" {
   metadata {
     name        = var.project_name
     description = "terraform project"
