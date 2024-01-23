@@ -61,7 +61,7 @@ resource "rafay_group" "group-Workspace" {
   description = "Workspace Admin Group for ${var.project_name}"
 }
 
-resource "rafay_groupassociation" "grpassociation" {
+resource "rafay_groupassociation" "group-association" {
   group      = "WrkspAdmin-grp-${var.project_name}"
   project    = var.project_name
   roles = ["WORKSPACE_ADMIN"]
