@@ -12,3 +12,8 @@ variable "cluster_name" {
   type = string
   default = "multi-eks1"
 }
+
+variable "main_cluster_project_name" {
+  type = string
+  default = "team-a"
+}
