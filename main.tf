@@ -1,4 +1,16 @@
-provider "rafay" { } 
+terraform {
+  required_providers {
+    rafay = {
+      source = "RafaySystems/rafay"
+      version = "1.1.22"
+    }
+  }
+}
+
+provider "rafay" {
+  provider_config_file = "rafay_config.json"
+}
+
 resource "null_resource" "tfc_test" {
   count = 10
   provisioner "local-exec" {
