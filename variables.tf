@@ -8,3 +8,7 @@ variable "workspace_admins" {
   default = ["phani.kg@gmail.com"]
 }
 
+variable "cluster_name" {
+  type = string
+  default = "multi-eks1"
+}
