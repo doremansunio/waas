@@ -1,4 +1,4 @@
-provider "rafay" { } 
+provider "rafay" {} 
 resource "null_resource" "tfc_test" {
   count = 10
   provisioner "local-exec" {
