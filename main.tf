@@ -83,6 +83,20 @@ resource "rafay_cluster_sharing" "demo-terraform-specific" {
   }
 }
 
+resource "rafay_network_policy_profile" "tfdemonetworkpolicyprofile1" {
+  depends_on = [ rafay_cluster_sharing.demo-terraform-specific ]
+  metadata {
+    name    = "tfdemonetworkpolicyprofile1"
+    project = "terraform"
+  }
+  spec {
+    version = "v0"
+    installation_params {
+      policy_enforcement_mode = "default"
+    }
+  }
+}
+
 resource "rafay_namespace_network_policy_rule" "withinworkspacerule" {
   depends_on = [ rafay_cluster_sharing.demo-terraform-specific ]
   metadata {
