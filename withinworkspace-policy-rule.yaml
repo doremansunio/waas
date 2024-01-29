@@ -1,0 +1,18 @@
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: withinworkspace-policy-rule
+spec:
+  endpointSelector: {}
+  ingress:
+    - fromEndpoints:
+        - matchLabels:
+            io.kubernetes.pod.namespace.labels.project-name: team-e
+  ingress:
+    - fromEndpoints:
+        - matchLabels:
+            io.kubernetes.pod.namespace.labels.project-name: team-a
+  egress:
+    - toEndpoints:
+        - matchLabels:
+            io.kubernetes.pod.namespace.labels.project-name: team-e
