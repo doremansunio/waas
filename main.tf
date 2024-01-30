@@ -106,7 +106,7 @@ resource "rafay_namespace_network_policy_rule" "demo-withinworkspacerule" {
 }
 
 resource "rafay_namespace_network_policy" "demo-withinworkspacepolicy" {
-  depends_on = [rafay_namespace_network_policy_rule.withinworkspacerule]
+  depends_on = [rafay_namespace_network_policy_rule.demo-withinworkspacerule]
   metadata {
     name    = var.network_policy_name
     project = var.project_name
