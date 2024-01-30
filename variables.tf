@@ -1,6 +1,6 @@
 variable "project_name" {
   type = string
-  default = "team-k"
+  default = "team-q"
 }
 
 variable "workspace_admins" {
