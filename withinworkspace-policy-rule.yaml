@@ -1,7 +1,7 @@
 apiVersion: cilium.io/v2
 kind: CiliumNetworkPolicy
 metadata:
-  name: withinworkspace-policy-rule-test
+  name: withinworkspace-policy-rule
 spec:
   endpointSelector: {}
   ingress:
