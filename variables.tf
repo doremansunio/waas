@@ -35,7 +35,7 @@ variable "network_policy_rule_name" {
 
 variable "network_policy_rule_filepath" {
   type = string
-  default = "myrepo/master/test.yaml"
+  default = "file://test.yaml"
 }
 
 variable "network_policy_rule_version" {

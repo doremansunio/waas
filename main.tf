@@ -94,8 +94,10 @@ resource "rafay_namespace_network_policy_rule" "demo-withinworkspacerule" {
       type = "Yaml"
       artifact { 
         paths { 
-          name = var.network_policy_rule_filepath
+          name = test.yaml
         } 
+        repository = "myrepo"
+        revision = "master"
       }
     }
     version = var.network_policy_rule_version
