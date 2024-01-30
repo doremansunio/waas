@@ -7,8 +7,8 @@ spec:
   ingress:
     - fromEndpoints:
         - matchLabels:
-            io.kubernetes.pod.namespace.labels.project-name: team-k
+            io.kubernetes.pod.namespace.labels.project-name: team-q
   egress:
     - toEndpoints:
         - matchLabels:
-            io.kubernetes.pod.namespace.labels.project-name: team-k
+            io.kubernetes.pod.namespace.labels.project-name: team-q
