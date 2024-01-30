@@ -1,11 +1,16 @@
 variable "project_name" {
   type = string
-  default = "team-e"
+  default = "team-k"
 }
 
 variable "workspace_admins" {
   type    = list
   default = ["phani.kg@gmail.com"]
+}
+
+variable "workspace_shared_list" {
+  type    = list
+  default = ["team-a","team-b","team-e", "team-k"]
 }
 
 variable "cluster_name" {
