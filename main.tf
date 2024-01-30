@@ -84,8 +84,8 @@ resource "rafay_cluster_sharing" "demo-terraform-specific" {
 }
 
 resource "rafay_namespace_network_policy_rule" "demo-withinworkspacerule" {
-  depends_on = [ rafay_cluster_sharing.demo-terraform-specific ]
-  metadata {
+  depends_on = [rafay_cluster_sharing.demo-terraform-specific]
+  metadata {    
     name    = var.network_policy_rule_name
     project = var.project_name
   }
