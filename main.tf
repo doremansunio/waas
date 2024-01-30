@@ -83,7 +83,7 @@ resource "rafay_cluster_sharing" "demo-terraform-specific" {
   }
 }
 
-resource "rafay_namespace_network_policy_rule" "withinworkspacerule1" {
+resource "rafay_namespace_network_policy_rule" "demo-withinworkspacerule" {
   depends_on = [ rafay_cluster_sharing.demo-terraform-specific ]
   metadata {
     name    = var.network_policy_rule_name
@@ -105,7 +105,7 @@ resource "rafay_namespace_network_policy_rule" "withinworkspacerule1" {
   }
 }
 
-resource "rafay_namespace_network_policy" "withinworkspacepolicy1" {
+resource "rafay_namespace_network_policy" "demo-withinworkspacepolicy" {
   depends_on = [rafay_namespace_network_policy_rule.withinworkspacerule]
   metadata {
     name    = var.network_policy_name
