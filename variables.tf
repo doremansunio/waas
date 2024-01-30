@@ -35,7 +35,7 @@ variable "network_policy_rule_name" {
 
 variable "network_policy_rule_filepath" {
   type = string
-  default = "file://test.yaml"
+  default = "file://withinworkspace-policy-rule.yaml"
 }
 
 variable "network_policy_rule_version" {
