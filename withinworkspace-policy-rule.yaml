@@ -3,12 +3,14 @@ kind: CiliumNetworkPolicy
 metadata:
   name: withinworkspace-policy-rule
 spec:
-  endpointSelector: {}
+  endpointSelector:
+    matchLabels:
+      "io.kubernetes.pod.namespace.labels.project-name": team-q
   ingress:
     - fromEndpoints:
         - matchLabels:
-            io.kubernetes.pod.namespace.labels.project-name: team-q
+            "io.kubernetes.pod.namespace.labels.project-name": team-q
   egress:
     - toEndpoints:
         - matchLabels:
-            io.kubernetes.pod.namespace.labels.project-name: team-q
+            "io.kubernetes.pod.namespace.labels.project-name": team-q

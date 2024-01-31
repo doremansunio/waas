@@ -40,5 +40,5 @@ variable "network_policy_rule_filepath" {
 
 variable "network_policy_rule_version" {
   type = string
-  default = "v3"
+  default = "v1"
 }
