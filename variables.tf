@@ -1,16 +1,11 @@
+variable "main_cluster_project_name" {
+  type = string
+  default = "centralpool"
+}
+
 variable "project_name" {
   type = string
   default = "team-q"
-}
-
-variable "workspace_admins" {
-  type    = list
-  default = ["phani.kg@gmail.com"]
-}
-
-variable "workspace_shared_list" {
-  type    = list
-  default = ["team-a","team-b","team-e", "team-k"]
 }
 
 variable "cluster_name" {
@@ -18,9 +13,9 @@ variable "cluster_name" {
   default = "multi-eks2"
 }
 
-variable "main_cluster_project_name" {
-  type = string
-  default = "team-a"
+variable "workspace_admins" {
+  type    = list
+  default = ["phani.kg@gmail.com"]
 }
 
 variable "network_policy_name" {
