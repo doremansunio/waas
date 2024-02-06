@@ -10,7 +10,7 @@ variable "project_name" {
 
 variable "cluster_name" {
   type = string
-  default = "multi-eks2"
+  default = "multi-eks1"
 }
 
 variable "workspace_admins" {
