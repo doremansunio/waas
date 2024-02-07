@@ -6,7 +6,7 @@ variable "main_cluster_project_name" {
 variable "project_name" {
   type = string
   default = "team-q"
-}
+} 
 
 variable "cluster_name" {
   type = string
