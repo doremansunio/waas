@@ -1,4 +1,4 @@
-variable "main_cluster_project_name" {
+variable "central_pool_name" {
   type = string
   default = "centralpool"
 }
@@ -20,17 +20,17 @@ variable "workspace_admins" {
 
 variable "network_policy_name" {
   type = string
-  default = "withinworkspace-policy"
+  default = "deny-all-for-ns-policy"
 }
 
 variable "network_policy_rule_name" {
   type = string
-  default = "withinworkspace-policy-rule"
+  default = "deny-all-for-ns-policy-rule"
 }
 
 variable "network_policy_rule_filepath" {
   type = string
-  default = "file://withinworkspace-policy-rule.yaml"
+  default = "file://deny-all-for-namespace.yaml"
 }
 
 variable "network_policy_rule_version" {

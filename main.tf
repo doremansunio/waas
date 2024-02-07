@@ -74,7 +74,7 @@ resource "rafay_groupassociation" "group-association" {
 resource "rafay_cluster_sharing" "demo-terraform-specific" {
   depends_on = [rafay_project.rafay_proj_new]
   clustername = var.cluster_name
-  project     = var.main_cluster_project_name
+  project     = var.central_pool_name
   sharing {
     all = false
     projects {
