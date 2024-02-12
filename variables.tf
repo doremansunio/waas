@@ -1,6 +1,6 @@
 variable "central_pool_name" {
   type = string
-  default = "centralpool"
+  default = "mm-project-1"
 }
 
 variable "project_name" {
@@ -10,7 +10,7 @@ variable "project_name" {
 
 variable "cluster_name" {
   type = string
-  default = "multi-eks1"
+  default = "eks-cluster-1"
 }
 
 variable "workspace_admins" {
