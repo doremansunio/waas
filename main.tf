@@ -68,7 +68,7 @@ resource "rafay_groupassociation" "group-association" {
   group      = "WrkspAdmin-grp-${var.project_name}"
   project    = var.project_name
   roles = ["WORKSPACE_ADMIN"]
-  add_users = var.workspace_admins
+  add_users = ["${var.workspace_admins}"]
 }
 
 resource "rafay_cluster_sharing" "demo-terraform-specific" {
