@@ -101,8 +101,7 @@ resource "rafay_namespace_network_policy_rule" "demo-withinworkspacerule" {
     artifact {
       type = "Yaml"
       artifact { 
-        paths { 
-          //name = var.network_policy_rule_filepath
+        paths {           
           name = "file://${var.project_name}-within-ws-rule.yaml"
         } 
       }
