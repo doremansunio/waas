@@ -83,9 +83,9 @@ resource "rafay_groupassociation" "group-association" {
 #   }
 # }
 
-resource "local_file" "netpolicy-file" {
+data "local_file" "netpolicy-file" {
   //depends_on = [ rafay_cluster_sharing.demo-terraform-specific ]
-  depends_on = [rafay_groupassociation.group-association]
+  //depends_on = [rafay_groupassociation.group-association]
   filename = "${var.project_name}-within-ws-rule.yaml"
   content = templatefile("${path.module}/net-policy-template.yaml", {
     project_name = var.project_name
