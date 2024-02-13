@@ -85,7 +85,7 @@ resource "rafay_cluster_sharing" "demo-terraform-specific" {
 
 resource "local_file" "netpolicy-file" {
   depends_on = [ rafay_cluster_sharing.demo-terraform-specific ]
-  filename = "within-ws-rule.yaml"
+  filename = "${var.project_name}-within-ws-rule.yaml"
   content = templatefile("${path.module}/net-policy-template.yaml", {
     project_name = var.project_name
   })
@@ -102,7 +102,8 @@ resource "rafay_namespace_network_policy_rule" "demo-withinworkspacerule" {
       type = "Yaml"
       artifact { 
         paths { 
-          name = var.network_policy_rule_filepath
+          //name = var.network_policy_rule_filepath
+          name = "${path.module}/net-policy-template.yaml"
         } 
       }
     }
