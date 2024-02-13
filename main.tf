@@ -71,17 +71,17 @@ resource "rafay_groupassociation" "group-association" {
   add_users = ["${var.workspace_admins}"]
 }
 
-resource "rafay_cluster_sharing" "demo-terraform-specific" {
-  depends_on = [rafay_project.rafay_proj_new]
-  clustername = var.cluster_name
-  project     = var.central_pool_name
-  sharing {
-    all = false
-    projects {
-      name = var.project_name
-    }    
-  }
-}
+# resource "rafay_cluster_sharing" "demo-terraform-specific" {
+#   depends_on = [rafay_project.rafay_proj_new]
+#   clustername = var.cluster_name
+#   project     = var.central_pool_name
+#   sharing {
+#     all = false
+#     projects {
+#       name = var.project_name
+#     }    
+#   }
+# }
 
 resource "local_file" "netpolicy-file" {
   depends_on = [ rafay_cluster_sharing.demo-terraform-specific ]
