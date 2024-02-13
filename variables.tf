@@ -22,10 +22,6 @@ variable "network_policy_rule_name" {
   type = string
 }
 
-variable "network_policy_rule_filepath" {
-  type = string  
-}
-
 variable "network_policy_rule_version" {
   type = string  
 }
