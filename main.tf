@@ -4,11 +4,19 @@ terraform {
       source = "RafaySystems/rafay"
       version = "1.1.22"
     }
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 5.0"
+    }
   }
 }
 
 provider "rafay" {
   # provider_config_file = "./rafay_config.json"
+}
+
+provider "aws" {
+    region = "ap-south-1"
 }
 
 # resource "null_resource" "tfc_test" {
@@ -18,14 +26,14 @@ provider "rafay" {
 #   }
 # }
 
-resource "local_file" "netpolicy-file" {
-  //depends_on = [ rafay_cluster_sharing.demo-terraform-specific ]
-  //depends_on = [rafay_groupassociation.group-association]
-  filename = "${var.project_name}-within-ws-rule.yaml"
-  content = templatefile("${path.module}/net-policy-template.yaml", {
-    project_name = var.project_name
-  })
-}
+# resource "local_file" "netpolicy-file" {
+#   //depends_on = [ rafay_cluster_sharing.demo-terraform-specific ]
+#   //depends_on = [rafay_groupassociation.group-association]
+#   filename = "${var.project_name}-within-ws-rule.yaml"
+#   content = templatefile("${path.module}/net-policy-template.yaml", {
+#     project_name = var.project_name
+#   })
+# }
    
 resource "rafay_project" "rafay_proj_new" {
   depends_on = [ local_file.netpolicy-file ]
@@ -34,35 +42,7 @@ resource "rafay_project" "rafay_proj_new" {
     description = "terraform project"
   }
   spec {
-    default = false
-    # cluster_resource_quota {
-    #   cpu_requests = "4000m"
-    #   memory_requests = "4096Mi"
-    #   cpu_limits = "8000m"
-    #   memory_limits = "8192Mi"
-    #   config_maps = "10"
-    #   persistent_volume_claims = "5"
-    #   services = "20"    
-    #   pods = "200"
-    #   replication_controllers = "10"
-    #   services_load_balancers = "10"
-    #   services_node_ports = "10"
-    #   storage_requests = "100Gi"
-    # }
-    # default_cluster_namespace_quota {
-    #   cpu_requests = "1000m"
-    #   memory_requests = "1024Mi"
-    #   cpu_limits = "2000m"
-    #   memory_limits = "2048Mi"
-    #   config_maps = "5"
-    #   persistent_volume_claims = "2"
-    #   services = "10"
-    #   pods = "20"
-    #   replication_controllers = "4"
-    #   services_load_balancers = "4"
-    #   services_node_ports = "4"
-    #   storage_requests = "10Gi"
-    # }
+    default = false    
   }
 }
 
@@ -93,6 +73,20 @@ resource "rafay_groupassociation" "group-association" {
 #   }
 # }
 
+data "template_file" "example" {    
+    template = file("${path.module}/net-policy-template.yaml")
+    vars = {
+        project_name = var.project_name
+    }
+}
+
+resource "aws_s3_object" "s3file" {
+    bucket = "rafay-s3-bucket" //data.aws_s3_bucket.bukname.bucket
+    key = "my-folder/${var.project_name}-within-ws-rule.yaml"
+    content = data.template_file.example.rendered     
+}
+
+
 resource "rafay_namespace_network_policy_rule" "demo-withinworkspacerule" {
   depends_on = [local_file.netpolicy-file]
   metadata {    
@@ -104,7 +98,8 @@ resource "rafay_namespace_network_policy_rule" "demo-withinworkspacerule" {
       type = "Yaml"
       artifact { 
         paths {           
-          name = "file://${var.project_name}-within-ws-rule.yaml"
+          //name = "file://${var.project_name}-within-ws-rule.yaml"
+          name = "file://${aws_s3_object.s3file.key}"
         } 
       }
     }
