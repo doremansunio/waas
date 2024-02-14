@@ -36,7 +36,7 @@ provider "aws" {
 # }
    
 resource "rafay_project" "rafay_proj_new" {
-  depends_on = [ local_file.netpolicy-file ]
+  //depends_on = [ local_file.netpolicy-file ]
   metadata {
     name        = var.project_name
     description = "terraform project"
@@ -74,21 +74,23 @@ resource "rafay_groupassociation" "group-association" {
 # }
 
 data "template_file" "example" {    
-    template = file("${path.module}/net-policy-template.yaml")
-    vars = {
-        project_name = var.project_name
-    }
+  depends_on = [ rafay_groupassociation.group-association ]
+  template = file("${path.module}/net-policy-template.yaml")
+  vars = {
+      project_name = var.project_name
+  }
 }
 
 resource "aws_s3_object" "s3file" {
-    bucket = "rafay-s3-bucket" //data.aws_s3_bucket.bukname.bucket
-    key = "my-folder/${var.project_name}-within-ws-rule.yaml"
-    content = data.template_file.example.rendered     
+  depends_on = [ data.template_file.example ]
+  bucket = "rafay-s3-bucket" //data.aws_s3_bucket.bukname.bucket
+  key = "my-folder/${var.project_name}-within-ws-rule.yaml"
+  content = data.template_file.example.rendered     
 }
 
 
 resource "rafay_namespace_network_policy_rule" "demo-withinworkspacerule" {
-  depends_on = [local_file.netpolicy-file]
+  depends_on = [aws_s3_object.s3file]
   metadata {    
     name    = var.network_policy_rule_name
     project = var.project_name
