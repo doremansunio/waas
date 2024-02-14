@@ -84,7 +84,7 @@ resource "github_repository_file" "netfile" {
   depends_on = [data.template_file.example]
   repository     = "gittest"
   branch = "main"
-  file           = "outfiles/${var.project_name}-within-ws-rule.yaml"
+  file           = "gittest/outfiles/${var.project_name}-within-ws-rule.yaml"
   content        = data.template_file.example.rendered
   overwrite_on_create = true
 }
