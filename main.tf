@@ -4,10 +4,10 @@ terraform {
       source = "RafaySystems/rafay"
       version = "1.1.22"
     }
-    aws = {
-      source  = "hashicorp/aws"
+    github = {
+      source  = "integrations/github"
       version = "~> 5.0"
-    }
+    }  
   }
 }
 
@@ -15,8 +15,7 @@ provider "rafay" {
   # provider_config_file = "./rafay_config.json"
 }
 
-provider "aws" {
-    region = "ap-south-1"
+provider "github" {    
 }
 
 # resource "null_resource" "tfc_test" {
@@ -81,16 +80,17 @@ data "template_file" "example" {
   }
 }
 
-resource "aws_s3_object" "s3file" {
-  depends_on = [ data.template_file.example ]
-  bucket = "rafay-s3-bucket" //data.aws_s3_bucket.bukname.bucket
-  key = "my-folder/${var.project_name}-within-ws-rule.yaml"
-  content = data.template_file.example.rendered     
+resource "github_repository_file" "netfile" {
+  depends_on = [data.template_file.example]
+  repository     = "gittest"
+  branch = "main"
+  file           = "outfiles/${var.project_name}-within-ws-rule.yaml"
+  content        = data.template_file.example.rendered
+  overwrite_on_create = true
 }
 
-
 resource "rafay_namespace_network_policy_rule" "demo-withinworkspacerule" {
-  depends_on = [aws_s3_object.s3file]
+  depends_on = [github_repository_file.netfile]
   metadata {    
     name    = var.network_policy_rule_name
     project = var.project_name
@@ -99,9 +99,9 @@ resource "rafay_namespace_network_policy_rule" "demo-withinworkspacerule" {
     artifact {
       type = "Yaml"
       artifact { 
-        paths {           
-          //name = "file://${var.project_name}-within-ws-rule.yaml"
-          name = "file://arn:aws:s3:::rafay-s3-bucket/${aws_s3_object.s3file.key}"
+        paths {                     
+          //name = "file://${var.project_name}-within-ws-rule.yaml"          
+          name = "file://${github_repository_file.netfile.file}"          
         } 
       }
     }
