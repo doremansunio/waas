@@ -82,9 +82,9 @@ data "template_file" "example" {
 
 resource "github_repository_file" "netfile" {
   depends_on = [data.template_file.example]
-  repository     = "gittest"
+  repository     = "waas-repo"
   branch = "main"
-  file           = "gittest/outfiles/${var.project_name}-within-ws-rule.yaml"
+  file           = "netfiles/${var.project_name}-within-ws-rule.yaml"
   content        = data.template_file.example.rendered
   overwrite_on_create = true
 }
@@ -98,11 +98,13 @@ resource "rafay_namespace_network_policy_rule" "demo-withinworkspacerule" {
   spec {
     artifact {
       type = "Yaml"
+
       artifact { 
+        repository = "gittest"
         paths {                     
           //name = "file://${var.project_name}-within-ws-rule.yaml"          
-          //name = "file://${github_repository_file.netfile.}"          
-          name = "file://github.com/doremansunio/gittest/blob/main/outfiles/tz1-within-ws-rule.yaml"
+          name = "file://${github_repository_file.netfile.file}"          
+          //name = "https://github.com/doremansunio/gittest/blob/main/outfiles/tz1-within-ws-rule.yaml"
         } 
       }
     }
