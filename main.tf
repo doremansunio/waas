@@ -101,7 +101,7 @@ resource "rafay_namespace_network_policy_rule" "demo-withinworkspacerule" {
       artifact { 
         paths {           
           //name = "file://${var.project_name}-within-ws-rule.yaml"
-          name = "file://${aws_s3_object.s3file.key}"
+          name = "file://arn:aws:s3:::rafay-s3-bucket/${aws_s3_object.s3file.key}"
         } 
       }
     }
