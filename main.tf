@@ -101,7 +101,8 @@ resource "rafay_namespace_network_policy_rule" "demo-withinworkspacerule" {
       artifact { 
         paths {                     
           //name = "file://${var.project_name}-within-ws-rule.yaml"          
-          name = "file://${github_repository_file.netfile.file}"          
+          //name = "file://${github_repository_file.netfile.}"          
+          name = "file://github.com/doremansunio/gittest/blob/main/outfiles/tz1-within-ws-rule.yaml"
         } 
       }
     }
