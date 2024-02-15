@@ -86,6 +86,7 @@ resource "github_repository_file" "netfile" {
   branch         = "main"
   file           = "netfiles/${var.project_name}-within-ws-rule.yaml"
   content        = data.template_file.tempnetfile.rendered
+  commit_message = "${var.project_name}-within-ws-rule.yaml created"
   overwrite_on_create = true
 }
 
