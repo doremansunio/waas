@@ -93,15 +93,16 @@ resource "rafay_namespace_network_policy_rule" "demo-withinworkspacerule" {
   depends_on = [github_repository_file.netfile]
   metadata {    
     name    = var.network_policy_rule_name
-    project = var.project_name
+    project = var.project_name    
   }
   spec {
     artifact {
       type = "Yaml"
-      artifact {         
+      artifact {               
         repository = "waas-repo"
-        revision = "main"
-        paths {                     
+        revision = "main"     
+        
+        paths {                               
           //name = "file://${var.project_name}-within-ws-rule.yaml"          
           name = "file://netfiles/team1-within-ws-rule.yaml"          
           //name = "file://github.com/doremansunio/waas/tree/main/netfiles/${var.project_name}-within-ws-rule.yaml}}"
