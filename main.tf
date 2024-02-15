@@ -89,6 +89,7 @@ resource "github_repository_file" "netfile" {
   overwrite_on_create = true
 }
 
+#
 resource "rafay_namespace_network_policy_rule" "demo-withinworkspacerule" {
   depends_on = [github_repository_file.netfile]
   metadata {    
