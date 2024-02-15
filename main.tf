@@ -102,7 +102,7 @@ resource "rafay_namespace_network_policy_rule" "demo-withinworkspacerule" {
         paths {                     
           //name = "file://${var.project_name}-within-ws-rule.yaml"          
           //name = "file://${github_repository_file.netfile.file}"          
-          name = "https://https://github.com/doremansunio/waas/tree/main/netfiles/${var.project_name}-within-ws-rule.yaml}}"
+          name = "https://github.com/doremansunio/waas/tree/main/netfiles/${var.project_name}-within-ws-rule.yaml}}"
         } 
       }
     }
