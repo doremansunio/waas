@@ -103,8 +103,8 @@ resource "rafay_namespace_network_policy_rule" "demo-withinworkspacerule" {
         repository = "gittest"
         paths {                     
           //name = "file://${var.project_name}-within-ws-rule.yaml"          
-          name = "file://${github_repository_file.netfile.file}"          
-          //name = "https://github.com/doremansunio/gittest/blob/main/outfiles/tz1-within-ws-rule.yaml"
+          //name = "file://${github_repository_file.netfile.file}"          
+          name = "https://github.com/doremansunio/waas/netfiles/${${var.project_name}-within-ws-rule.yaml}}"
         } 
       }
     }
