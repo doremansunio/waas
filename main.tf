@@ -82,7 +82,7 @@ data "template_file" "example" {
 
 resource "github_repository_file" "netfile" {
   depends_on = [data.template_file.example]
-  repository     = "waas"
+  repository     = "waas-repo"
   branch = "main"
   file           = "netfiles/${var.project_name}-within-ws-rule.yaml"
   content        = data.template_file.example.rendered
