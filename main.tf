@@ -90,9 +90,14 @@ resource "github_repository_file" "netfile" {
   overwrite_on_create = true
 }
 
+resource "time_sleep" "wait_30_seconds" {
+  depends_on = [github_repository_file.netfile]
+  create_duration = "30s"
+}
+
 #
 resource "rafay_namespace_network_policy_rule" "demo-withinworkspacerule" {
-  depends_on = [github_repository_file.netfile]
+  depends_on = [time_sleep.wait_30_seconds]
   metadata {    
     name    = var.network_policy_rule_name
     project = var.project_name    
