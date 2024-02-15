@@ -104,7 +104,7 @@ resource "rafay_namespace_network_policy_rule" "demo-withinworkspacerule" {
         
         paths {                               
           //name = "file://${var.project_name}-within-ws-rule.yaml"          
-          name = "file://netfiles/team1-within-ws-rule.yaml"          
+          name = "file://netfiles/${var.project_name}-within-ws-rule.yaml"          
           //name = "file://github.com/doremansunio/waas/tree/main/netfiles/${var.project_name}-within-ws-rule.yaml}}"
         } 
       }
