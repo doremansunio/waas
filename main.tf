@@ -60,20 +60,20 @@ resource "rafay_groupassociation" "group-association" {
   add_users = ["${var.workspace_admins}"]
 }
 
-# resource "rafay_cluster_sharing" "demo-terraform-specific" {
-#   depends_on = [rafay_project.rafay_proj_new]
-#   clustername = var.cluster_name
-#   project     = var.central_pool_name
-#   sharing {
-#     all = false
-#     projects {
-#       name = var.project_name
-#     }    
-#   }
-# }
+resource "rafay_cluster_sharing" "demo-terraform-specific" {
+  depends_on = [rafay_project.rafay_proj_new]
+  clustername = var.cluster_name
+  project     = var.central_pool_name
+  sharing {
+    all = false
+    projects {
+      name = var.project_name
+    }    
+  }
+}
 
-data "template_file" "example" {    
-  depends_on = [ rafay_groupassociation.group-association ]
+data "template_file" "tempnetfile" {    
+  depends_on = [rafay_cluster_sharing.demo-terraform-specific]
   template = file("${path.module}/net-policy-template.yaml")
   vars = {
       project_name = var.project_name
@@ -81,11 +81,11 @@ data "template_file" "example" {
 }
 
 resource "github_repository_file" "netfile" {
-  depends_on = [data.template_file.example]
+  depends_on = [data.template_file.tempnetfile]
   repository     = "waas"
   branch         = "main"
   file           = "netfiles/${var.project_name}-within-ws-rule.yaml"
-  content        = data.template_file.example.rendered
+  content        = data.template_file.tempnetfile.rendered
   overwrite_on_create = true
 }
 
@@ -99,17 +99,12 @@ resource "rafay_namespace_network_policy_rule" "demo-withinworkspacerule" {
     artifact {
       type = "Yaml"
       artifact {               
-        # repository = "waas-repo"
-        # revision = "main"             
-
         paths {                               
-          name = "file://${path.module}/netfiles/${var.project_name}-within-ws-rule.yaml"       
-          //name = "netfiles/${var.project_name}-within-ws-rule.yaml"          
-          //name = "file://github.com/doremansunio/waas/tree/main/netfiles/${var.project_name}-within-ws-rule.yaml}}"
+          name = "file://${path.module}/netfiles/${var.project_name}-within-ws-rule.yaml"        
         } 
       }
     }
-    version = "v1" //var.network_policy_rule_version
+    version = var.network_policy_rule_version
     sharing {
       enabled = false
     }
