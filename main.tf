@@ -98,9 +98,7 @@ resource "rafay_namespace_network_policy_rule" "demo-withinworkspacerule" {
   spec {
     artifact {
       type = "Yaml"
-
-      artifact { 
-        repository = "gittest"
+      artifact {         
         paths {                     
           //name = "file://${var.project_name}-within-ws-rule.yaml"          
           //name = "file://${github_repository_file.netfile.file}"          
