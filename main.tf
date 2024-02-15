@@ -34,8 +34,7 @@ provider "github" {
 #   })
 # }
    
-resource "rafay_project" "rafay_proj_new" {
-  //depends_on = [ local_file.netpolicy-file ]
+resource "rafay_project" "rafay_proj_new" {  
   metadata {
     name        = var.project_name
     description = "terraform project"
@@ -60,20 +59,21 @@ resource "rafay_groupassociation" "group-association" {
   add_users = ["${var.workspace_admins}"]
 }
 
-resource "rafay_cluster_sharing" "demo-terraform-specific" {
-  depends_on = [rafay_groupassociation.group-association]
-  clustername = var.cluster_name
-  project     = var.central_pool_name
-  sharing {
-    all = false
-    projects {
-      name = var.project_name
-    }    
-  }
-}
+# resource "rafay_cluster_sharing" "demo-terraform-specific" {
+#   depends_on = [rafay_groupassociation.group-association]
+#   clustername = var.cluster_name
+#   project     = var.central_pool_name
+#   sharing {
+#     all = false
+#     projects {
+#       name = var.project_name
+#     }    
+#   }
+# }
 
 data "template_file" "tempnetfile" {    
-  depends_on = [rafay_cluster_sharing.demo-terraform-specific]
+  //depends_on = [rafay_cluster_sharing.demo-terraform-specific]
+  depends_on = [ rafay_groupassociation.group-association ]
   template = file("${path.module}/net-policy-template.yaml")
   vars = {
       project_name = var.project_name
