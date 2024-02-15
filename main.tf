@@ -108,7 +108,7 @@ resource "rafay_namespace_network_policy_rule" "demo-withinworkspacerule" {
         } 
       }
     }
-    version = var.network_policy_rule_version
+    version = "v1" //var.network_policy_rule_version
     sharing {
       enabled = false
     }
