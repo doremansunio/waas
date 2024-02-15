@@ -56,12 +56,12 @@ resource "rafay_groupassociation" "group-association" {
   depends_on = [rafay_group.group-Workspace]
   group      = "WrkspAdmin-grp-${var.project_name}"
   project    = var.project_name
-  roles = ["WORKSPACE_ADMIN"]
+  roles = ["WORKSPACE_ADMIN","ENVIRONMENT_TEMPLATE_USER"]
   add_users = ["${var.workspace_admins}"]
 }
 
 resource "rafay_cluster_sharing" "demo-terraform-specific" {
-  depends_on = [rafay_project.rafay_proj_new]
+  depends_on = [rafay_groupassociation.group-association]
   clustername = var.cluster_name
   project     = var.central_pool_name
   sharing {
