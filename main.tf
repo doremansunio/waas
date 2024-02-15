@@ -97,14 +97,14 @@ resource "rafay_namespace_network_policy_rule" "demo-withinworkspacerule" {
   }
   spec {
     artifact {
-      //type = "Yaml"
+      type = "Yaml"
       artifact {               
         repository = "waas-repo"
         revision = "main"             
         
         paths {                               
           //name = "file://${var.project_name}-within-ws-rule.yaml"          
-          name = "file://netfiles/${var.project_name}-within-ws-rule.yaml"          
+          name = "netfiles/${var.project_name}-within-ws-rule.yaml"          
           //name = "file://github.com/doremansunio/waas/tree/main/netfiles/${var.project_name}-within-ws-rule.yaml}}"
         } 
       }
